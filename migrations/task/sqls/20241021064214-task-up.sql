@@ -21,7 +21,7 @@ insert into "USER" (name, email, role) values
 --     5. 用戶名稱為`Q太郎`，Email 為`starplatinum@hexschooltest.io`，Role為`USER`
 --     6. 用戶名稱為 透明人，Email 為 opacity0@hexschooltest.io，Role 為 USER
 INSERT INTO "USER"
-  (NAME, email, role)
+  (name, email, role)
 VALUES
   ('李燕容', 'lee2000@hexschooltest.io', 'USER'),
   ('王小明', 'wXlTq@hexschooltest.io', 'USER'),
@@ -70,7 +70,7 @@ INSERT INTO "CREDIT_PURCHASE"
   SELECT usr.id, cp.id, cp.credit_amount, cp.price
     FROM "USER" AS "usr"
    CROSS JOIN "CREDIT_PACKAGE" AS "cp"
-   WHERE u.email = 'wXlTq@hexschooltest.io'
+   WHERE usr.email = 'wXlTq@hexschooltest.io'
      AND cp.name IN ('14 堂組合包方案', '21 堂組合包方案');
 
 INSERT INTO "CREDIT_PURCHASE"
@@ -78,7 +78,7 @@ INSERT INTO "CREDIT_PURCHASE"
   SELECT usr.id, cp.id, cp.credit_amount, cp.price
     FROM "USER" AS "usr"
    CROSS JOIN "CREDIT_PACKAGE" AS "cp"
-   WHERE u.email = 'richman@hexschooltest.io'
+   WHERE usr.email = 'richman@hexschooltest.io'
      AND cp.name = '14 堂組合包方案';
 
 -- ████████  █████   █    ████   
@@ -135,7 +135,7 @@ VALUES
      FROM "COACH"
     WHERE user_id =
           (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io')),
-   (SELECT id FROM "SKILL" WHERE name = '瑜珈'));
+   (SELECT id FROM "SKILL" WHERE name = '瑜伽'));
   
 INSERT INTO "COACH_LINK_SKILL"
   (coach_id, skill_id)
@@ -235,7 +235,7 @@ VALUES
 UPDATE "COURSE_BOOKING"
 SET
 	status = '課程已取消',
-    cancelled_at = TO_TIMESTAMP('2024-11-24 17:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+    cancelled_at = TO_TIMESTAMP('2024-11-24 17:00:00', 'YYYY-MM-DD HH24:MI:SS')
 WHERE
 	user_id = (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io');
 -- 5-3. 新增：`王小明`再次預約 `李燕容`   的課程，請在`COURSE_BOOKING`新增一筆資料：
